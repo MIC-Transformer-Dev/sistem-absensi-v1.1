@@ -232,6 +232,18 @@ class Rekap_model extends CI_Model
         return $this->db->get("presensi")->num_rows();
     }
 
+    // fungsi ketika terlambat
+    function  _cek6($tanggal, $id_karyawan)
+    {
+        $this->db->distinct();
+        $this->db->where("tgl", $tanggal);
+        $this->db->where("id_karyawan", $id_karyawan);
+        $this->db->where('id_khd', 6);
+        $this->db->where('id_status', 1);
+        $this->db->distinct();
+        return $this->db->get("presensi")->num_rows();
+    }
+
     function resultCek($resultHadir)
     {
         $cek = count($resultHadir);
@@ -326,13 +338,14 @@ class Rekap_model extends CI_Model
     // fungsi menghitung total kehadiran (masuk)
     function totalHadir($id, $id_karyawan)
     {
+        $ids = array(1, 6);
         $this->db->select("a.gedung_id,b.id_karyawan,c.tgl");
         $this->db->from("gedung as a ,presensi as c, karyawan as b");
         $this->db->where("a.gedung_id=b.gedung_id");
         $this->db->where("b.id_karyawan=c.id_karyawan");
         $this->db->where("a.gedung_id", $id);
         $this->db->where("b.id_karyawan", $id_karyawan);
-        $this->db->where("c.id_khd", 1);
+        $this->db->where_in("c.id_khd", $ids);
         $this->db->distinct();
 
         return $this->db->get()->num_rows();
@@ -341,10 +354,11 @@ class Rekap_model extends CI_Model
     function tohadir($id_karyawan)
     {
         $id_karyawan = $this->input->post('id_karyawan');
+        $ids = array(1, 6);
         return
             $this->db->select('count(id_karyawan) as total')
             ->where('id_karyawan', $id_karyawan)
-            ->where('id_khd', 1)
+            ->where_in('id_khd', $ids)
             ->where('month(tgl) = month(CURRENT_date())')
             ->get('presensi')->result_array();
     }
@@ -386,13 +400,14 @@ class Rekap_model extends CI_Model
     {
         $start = $_GET['start'];
         $end = $_GET['end'];
+        $ids = array(1, 6);
         $this->db->select("a.gedung_id,b.id_karyawan,c.tgl");
         $this->db->from("gedung as a ,presensi as c, karyawan as b");
         $this->db->where("a.gedung_id=b.gedung_id");
         $this->db->where("b.id_karyawan=c.id_karyawan");
         $this->db->where("a.gedung_id", $id);
         $this->db->where("b.id_karyawan", $id_karyawan);
-        $this->db->where("c.id_khd", 1);
+        $this->db->where_in("c.id_khd", $ids);
         $this->db->where("c.tgl >=", $start);
         $this->db->where("c.tgl <=", $end);
         $this->db->distinct();

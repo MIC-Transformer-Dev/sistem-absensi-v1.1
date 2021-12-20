@@ -18,7 +18,6 @@
                 <!-- /.widget-user-image -->
                 <h3 class="widget-user-username"><?php echo $id_karyawan ?></h3>
                 <h5 class="widget-user-desc"><?php echo $nama_karyawan; ?></h5>
-                <button onclick="printDiv('print-area')" class='pull-right'><i class='fa fa-print'></i> Print</button>
             </div>
             <div class="box-footer no-padding">
                 <ul class="nav nav-stacked">
@@ -29,6 +28,7 @@
             </div>
         </div>
     </div>
+    <button onclick="printDiv('print-area')" class='pull-right'><i class='fa fa-print'></i> Print</button>
 </div>
 <script type="text/javascript">
     function printDiv(divName) {

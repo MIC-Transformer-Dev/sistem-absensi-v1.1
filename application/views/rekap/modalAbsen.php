@@ -175,11 +175,11 @@
                                     "<tr>
                             <td>" . $no . "</td>
                             <td>" . $row->nama_karyawan . "</td>";
-                                if ($row->jabatan == 1  || $row->jabatan == 2) {
-                                    echo "<td style='color:red !important;width:30px;'>$row->nama_jabatan</td>";
-                                } else {
+                                // if ($row->jabatan == 1  || $row->jabatan == 2) {
+                                //     echo "<td style='color:red !important;width:30px;'>$row->nama_jabatan</td>";
+                                // } else {
                                     echo "<td>$row->nama_jabatan</td>";
-                                }
+                                // }
                                 if (count($resultHadir)) {
                                     foreach ($resultHadir as $datax) {
                                         $date_of_post = $datax->tgl;
@@ -193,6 +193,7 @@
                                         $ceki3 = $this->rekap->_cek3($datax->tgl, $row->id_karyawan);
                                         $ceki4 = $this->rekap->_cek4($datax->tgl, $row->id_karyawan);
                                         $ceki5 = $this->rekap->_cek5($datax->tgl, $row->id_karyawan);
+                                        $ceki6 = $this->rekap->_cek6($datax->tgl, $row->id_karyawan);
                                         $gedung = $this->gedung->get_by_id($segment = $this->uri->segment(3));
                                         $seg = $gedung->gedung_id;
                                         if ($ceki) {
@@ -214,11 +215,15 @@
                                                 $datax->adkhd = 'onclick="add_khd(' . "'" . $stamp . "','" . $row->id_karyawan . "','" . $seg . "'" . ')"';
                                                 $ceklist = "<b>O</b>";
                                             };
-                                        } else if (!$ceki) {
+                                        } else if ($ceki6) { {
+                                            $datax->adkhd = 'onclick="add_kd(' . $stamp . ')"';
+                                            $ceklist = "<b style='color:red'>T</b> ";
+                                        };
+                                        } else if (!$ceki && !$ceki6) {
                                             $datax->adkhd = 'onclick="add_khd(' . "'" . $stamp . "','" . $row->id_karyawan . "','" . $seg . "'" . ')"';
                                             $ceklist = "<a href='#'><i>-</i></a>";
                                         };
-                                        if (!$ceki) {
+                                        if (!$ceki && !$ceki6) {
                                             echo "<td style='cursor:pointer' $datax->adkhd>" . $ceklist . "</td>";
                                         } else if ($ceki5) {
                                             echo "<td style='background-color:red'></td>";
@@ -237,11 +242,11 @@
                                 echo "<tr>
                                 <td>" . $no . "</td>
                                 <td>" . $row->nama_karyawan . "</td>";
-                                if ($row->jabatan == 1  || $row->jabatan == 2) {
-                                    echo "<td style='color:red !important;width:30px;'>$row->nama_jabatan</td>";
-                                } else {
+                                // if ($row->jabatan == 1  || $row->jabatan == 2) {
+                                //     echo "<td style='color:red !important;width:30px;'>$row->nama_jabatan</td>";
+                                // } else {
                                     echo "<td>$row->nama_jabatan</td>";
-                                }
+                                // }
                                 if (count($resultHadir)) {
                                     foreach ($resultHadir as $datax) {
                                         $date_of_post = $datax->tgl;
@@ -255,6 +260,7 @@
                                         $ceki3 = $this->rekap->_cek3($datax->tgl, $row->id_karyawan);
                                         $ceki4 = $this->rekap->_cek4($datax->tgl, $row->id_karyawan);
                                         $ceki5 = $this->rekap->_cek5($datax->tgl, $row->id_karyawan);
+                                        $ceki6 = $this->rekap->_cek6($datax->tgl, $row->id_karyawan);
                                         $gedung = $this->gedung->get_by_id($segment = $this->uri->segment(3));
                                         $seg = $gedung->gedung_id;
                                         if ($ceki) {
@@ -276,11 +282,15 @@
                                                 $datax->adkhd = 'onclick="add_khd(' . "'" . $stamp . "','" . $row->id_karyawan . "','" . $seg . "'" . ')"';
                                                 $ceklist = "<b>O</b>";
                                             };
-                                        } else if (!$ceki) {
+                                        } else if ($ceki6) { {
+                                            $datax->adkhd = 'onclick="add_kd(' . $stamp . ')"';
+                                            $ceklist = "<b style='color:red'>T</b>";
+                                        };
+                                        } else if (!$ceki && !$ceki6) {
                                             $datax->adkhd = 'onclick="add_khd(' . "'" . $stamp . "','" . $row->id_karyawan . "','" . $seg . "'" . ')"';
                                             $ceklist = "<a href='#'><i>-</i></a>";
                                         };
-                                        if (!$ceki) {
+                                        if (!$ceki && !$ceki6) {
                                             echo "<td style='cursor:pointer' $datax->adkhd>" . $ceklist . "</td>";
                                         } else if ($ceki5) {
                                             echo "<td style='background-color:red'></td>";
@@ -298,6 +308,7 @@
                 </div>
                 &nbsp;&nbsp;&nbsp;<b style="padding-left : 30px">KETERANGAN :</b>&nbsp;&nbsp;&nbsp;
                 <b style="padding-left : 30px"><i class="fa fa-check"></i> = HADIR</b>&nbsp;&nbsp;&nbsp;
+                <b style="padding-left : 30px">T = TERLAMBAT</b>&nbsp;&nbsp;&nbsp;
                 <b style="padding-left : 30px">S = SAKIT</b>&nbsp;&nbsp;&nbsp;
                 <b style="padding-left : 30px">I = IJIN</b>&nbsp;&nbsp;&nbsp;
                 <b style="padding-left : 30px">A = TANPA KETERANGAN</b>&nbsp;&nbsp;&nbsp;
@@ -333,7 +344,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Ketererangan</label>
+                        <label class="control-label col-md-3">Keterangan</label>
                         <div class="col-md-10">
                             <input name="ket" value="" class="form-control" id="ket" type="text" />
                         </div>

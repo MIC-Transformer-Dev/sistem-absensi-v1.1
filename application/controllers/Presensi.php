@@ -123,11 +123,11 @@ class Presensi extends CI_Controller
                 'tgl' => date('Y-m-d'),
                 'jam_msk' => $this->input->post('jam_msk', TRUE),
                 'jam_klr' => $this->input->post('jam_klr', TRUE),
-                'id_khd' => 1,
-                'id_status' => 1,
+                'id_khd' => 4,
+                'id_status' => 3,
             );
         } else {
-            $this->session->set_flashdata('messageAlert', $this->messageAlert('error', 'Data Anggota tidak ditemukan'));
+            $this->session->set_flashdata('messageAlert', $this->messageAlert('error', 'Data Karyawan tidak ditemukan'));
             redirect($_SERVER['HTTP_REFERER']);
             return false;
         }
@@ -135,7 +135,7 @@ class Presensi extends CI_Controller
         $result_id = $result[0]->id_karyawan;
         $cek_absen = $this->Presensi_model->cek_id($result_id, $result_tgl);
         if ($cek_absen !== FALSE  && $cek_absen->num_rows() == 1) {
-            $this->session->set_flashdata('messageAlert', $this->messageAlert('warning', 'Nama Anggota Sudah diabsen'));
+            $this->session->set_flashdata('messageAlert', $this->messageAlert('warning', 'Nama Karyawan Sudah diabsen'));
             redirect($_SERVER['HTTP_REFERER']);
             return false;
         } else {
@@ -175,7 +175,7 @@ class Presensi extends CI_Controller
                 'id_khd' => set_value('id_khd', $row->id_khd),
                 'gedung_id' =>  $row->gedung_id,
                 'ket' => set_value('ket', $row->ket),
-                'id_status' => set_value('id_status', $row->ket),
+                'id_status' => set_value('id_status', $row->id_status),
                 'user' => $user, 'users'     => $this->ion_auth->user()->row(),
             );
             $this->template->load('template/template', 'presensi/presensi_form', $data);
@@ -214,7 +214,7 @@ class Presensi extends CI_Controller
                     'jam_klr' => $this->input->post('jam_klr', TRUE),
                     'id_khd' => $this->input->post('id_khd', TRUE),
                     'ket' => $this->input->post('ket', TRUE),
-                    'id_status' => 3,
+                    'id_status' => 3
                 );
             }
             $this->Presensi_model->update($this->input->post('id_absen', TRUE), $data);

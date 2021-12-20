@@ -24,6 +24,10 @@
                     <div>
                         <video id="video" width="800" height="600" style="border: 1px solid gray"></video>
                     </div>
+                    <ul class="list-unstyled" style="margin-top:9px">
+                        <li style="font-size: 150%"><b>Untuk melakukan presensi, dekatkan QR Code ke kamera sampai terdengar bunyi notifikasi pertama.</b></li>
+                        <li style="font-size: 150%"><b>Jauhkan QR code dari kamera dan tunggu 3 detik sampai bunyi notifikasi kedua.</b></li>
+                    </ul>
                     <textarea hidden="" name="id_karyawan" id="result" readonly></textarea>
                     <span>  <input type="submit"  id="button" class="btn btn-success btn-md" value="Cek Kehadiran"></span>
                     <?php echo form_close();?>
@@ -38,6 +42,7 @@
 window.addEventListener('load', function () {
     let selectedDeviceId;
     let audio = new Audio("assets/audio/beep.mp3");
+    let audio2 = new Audio("assets/audio/beep-2.mp3");
     const codeReader = new ZXing.BrowserQRCodeReader()
     console.log('ZXing code reader initialized')
     codeReader.getVideoInputDevices()
@@ -61,7 +66,7 @@ window.addEventListener('load', function () {
             console.log(result)
             document.getElementById('result').textContent = result.text
             if(result != null){
-                audio.play();
+                audio2.play();
             }
             const video = document.getElementById("video");
             const canvas = document.createElement("canvas");
@@ -69,30 +74,34 @@ window.addEventListener('load', function () {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             // draw the video at that frame
-            canvas.getContext('2d')
-            .drawImage(video, 0, 0, canvas.width, canvas.height);
+            setTimeout(function() {
+                canvas.getContext('2d')
+                .drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            var formData = new FormData(),
+                var formData = new FormData(),
                 uploadedImageName = result.text+'.png';
 
-            canvas.toBlob(function (blob) {
-                formData.append('gambar', blob, uploadedImageName);
-                formData.append('id_karyawan', result.text);
+                canvas.toBlob(function (blob) {
+                    formData.append('gambar', blob, uploadedImageName);
+                    formData.append('id_karyawan', result.text);
 
-                // console.log(formData);
-                $.ajax({
-                    data: formData,
-                    type: "POST",
-                    url: '<?=base_url("scan/cek_id")?>',
-                    processData: false,
-                    contentType: false,
-                    success: function(response){
-                        //if request if made successfully then the response represent the data
-
-                        window.location.reload();
-                    }
+                    // console.log(formData);
+                    $.ajax({
+                        data: formData,
+                        type: "POST",
+                        url: '<?=base_url("scan/cek_id")?>',
+                        processData: false,
+                        contentType: false,
+                        success: function(response){
+                            //if request if made successfully then the response represent the data
+                            audio.play();
+                            window.location.reload();
+                        }
+                    });
                 });
-            });
+            }, 3000);
+
+           
             // $('#button').submit();
         }).catch((err) => {
             console.error(err)

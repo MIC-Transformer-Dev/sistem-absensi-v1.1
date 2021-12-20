@@ -15,7 +15,7 @@
         <div class='col-xs-12'>
             <div class='box box-primary'>
                 <div class='box-header with-border'>
-                    <h3 class='box-title'>MANU MANAGEMENT</h3>
+                    <h3 class='box-title'>MENU MANAGEMENT</h3>
                     <div class="pull-right">
                         <?php echo anchor(site_url('tambah_menu'), ' <i class="fa fa-plus"></i> &nbsp;&nbsp; Tambah Baru', ' class="btn btn-unique btn-lg btn-create-data btn3d"'); ?>
                     </div>
