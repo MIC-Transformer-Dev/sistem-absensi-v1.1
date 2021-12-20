@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 10:22 AM
+-- Generation Time: Dec 20, 2021 at 09:10 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -121,7 +121,8 @@ INSERT INTO `kehadiran` (`id_khd`, `nama_khd`) VALUES
 (2, 'Sakit'),
 (3, 'Ijin'),
 (4, 'Alpha'),
-(5, 'Lepas/Off');
+(5, 'Lepas/Off'),
+(6, 'Terlambat');
 
 -- --------------------------------------------------------
 
@@ -195,7 +196,10 @@ CREATE TABLE `presensi` (
 --
 
 INSERT INTO `presensi` (`id_absen`, `id_karyawan`, `tgl`, `jam_msk`, `jam_klr`, `id_khd`, `ket`, `img`, `id_status`) VALUES
-(1, 'W2112170', '2021-12-11', '09:13:30', '04:38:20', 1, '', '', 1);
+(1, 'W2112170', '2021-12-11', '09:13:30', '04:38:20', 1, '', '', 2),
+(3, 'W2112170', '2021-12-13', '02:39:15', '04:09:09', 1, '', 'http://localhost/sistem-absensi/uploads/cam_image/W21121701.png', 2),
+(4, 'W2112170', '2021-12-14', '09:38:00', '17:12:00', 1, '', 'http://localhost/sistem-absensi/uploads/cam_image/W2112170.png', 2),
+(31, 'W2112170', '2021-12-20', '10:33:09', '00:00:00', 6, '', 'http://localhost/sistem-absensi/uploads/cam_image/W211217030.png', 1);
 
 -- --------------------------------------------------------
 
@@ -269,8 +273,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '::1', 'Admin', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1639034224, 1, 'Admin', 'MIC Transformer', NULL, '123412341234'),
-(2, '::1', 'Operator', '$2y$10$ibxBt.RYG7jib0JxBxB1.usc9pzjqUqPPTvwLgPp1gMRKg6VMLLei', 'operator@operator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1562178403, 1638959968, 1, 'operator', '2', NULL, '34890234809238490'),
+(1, '::1', 'Admin', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1639968196, 1, 'Admin', 'MIC Transformer', NULL, '123412341234'),
+(2, '::1', 'Operator', '$2y$10$ibxBt.RYG7jib0JxBxB1.usc9pzjqUqPPTvwLgPp1gMRKg6VMLLei', 'operator@operator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1562178403, 1639639442, 1, 'operator', '2', NULL, '34890234809238490'),
 (3, '::1', 'Staff', '$2y$12$RHPXgho6UJLQWv8W3F9oJekbSnFYXyhNADZvuqaYmGEoUD6Yl1Hd.', 'staff@staff.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1564294648, 1564294659, 1, 'staf', 'staff', NULL, '239423849234890');
 
 -- --------------------------------------------------------
@@ -402,19 +406,19 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kehadiran`
 --
 ALTER TABLE `kehadiran`
-  MODIFY `id_khd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_khd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -426,7 +430,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `shift`
@@ -438,7 +442,7 @@ ALTER TABLE `shift`
 -- AUTO_INCREMENT for table `stts`
 --
 ALTER TABLE `stts`
-  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
