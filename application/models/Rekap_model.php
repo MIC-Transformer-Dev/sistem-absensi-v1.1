@@ -239,7 +239,6 @@ class Rekap_model extends CI_Model
         $this->db->where("tgl", $tanggal);
         $this->db->where("id_karyawan", $id_karyawan);
         $this->db->where('id_khd', 6);
-        $this->db->where('id_status', 1);
         $this->db->distinct();
         return $this->db->get("presensi")->num_rows();
     }
@@ -268,6 +267,7 @@ class Rekap_model extends CI_Model
         $start = $_GET['start'];
         $end = $_GET['end'];
         $id_shift = $_GET['id_shift'];
+        $ids = array(1, 6);
         $this->db->select("a.id_karyawan,a.nama_karyawan,a.id_shift,a.jabatan,b.nama_jabatan,c.nama_shift,d.nama_gedung,e.id_khd,e.ket
         ,g.nama_status");
         $this->db->from("karyawan as a,jabatan as b, shift as c, gedung as d,presensi as e,kehadiran as f, stts as g");
@@ -278,7 +278,7 @@ class Rekap_model extends CI_Model
         $this->db->where("e.id_khd=f.id_khd");
         $this->db->where("e.id_status=g.id_status");
         $this->db->where("d.gedung_id", $id);
-        $this->db->where("e.id_khd", 1);
+        $this->db->where_in("e.id_khd", $ids);
         $this->db->where("e.id_status", 2);
         $this->db->where("e.tgl >=", $start);
         $this->db->where("e.tgl <=", $end);
@@ -293,7 +293,7 @@ class Rekap_model extends CI_Model
     // fungsi mendata rekap karyawan berdasarkan lokasi
     function karyawan($id)
     {
-
+        $ids = array(1, 6);
         $this->db->select("a.id_karyawan,a.nama_karyawan,b.nama_jabatan,c.nama_shift,d.nama_gedung,e.id_khd,e.ket
         ,g.nama_status");
         $this->db->from("karyawan as a,jabatan as b, shift as c, gedung as d,presensi as e,kehadiran as f, stts as g");
@@ -304,7 +304,7 @@ class Rekap_model extends CI_Model
         $this->db->where("e.id_khd=f.id_khd");
         $this->db->where("e.id_status=g.id_status");
         $this->db->where("d.gedung_id", $id);
-        $this->db->where("e.id_khd", 1);
+        $this->db->where_in("e.id_khd", $ids);
         $this->db->where("e.id_status", 2);
         $this->db->distinct();
         return $this->db->get('presensi')->result();
@@ -314,6 +314,7 @@ class Rekap_model extends CI_Model
     {
         $start = $_GET['start'];
         $end = $_GET['end'];
+        $ids = array(1, 6);
         $this->db->select("a.id_karyawan,a.nama_karyawan,a.id_shift,a.jabatan,b.nama_jabatan,c.nama_shift,d.nama_gedung,e.id_khd,e.ket
         ,g.nama_status");
         $this->db->from("karyawan as a,jabatan as b, shift as c, gedung as d,presensi as e,kehadiran as f, stts as g");
@@ -324,7 +325,7 @@ class Rekap_model extends CI_Model
         $this->db->where("e.id_khd=f.id_khd");
         $this->db->where("e.id_status=g.id_status");
         $this->db->where("d.gedung_id", $id);
-        $this->db->where("e.id_khd", 1);
+        $this->db->where_in("e.id_khd", $ids);
         $this->db->where("e.id_status", 2);
         $this->db->where("e.tgl >=", $start);
         $this->db->where("e.tgl <=", $end);

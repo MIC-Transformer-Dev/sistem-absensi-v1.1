@@ -54,6 +54,7 @@ class Scan extends Ci_Controller
 		$jam_msk = date('H:i:s');
 		$jam_klr = date('H:i:s');
 		$jam_msk_media = '09:00:00';
+		$jam_msk_nonmedia = '08:00:00';
 		$cek_id = $this->Scan->cek_id($result_code);
 		$cek_kehadiran = $this->Scan->cek_kehadiran($result_code, $tgl);
 		if (!$cek_id) {
@@ -106,27 +107,51 @@ class Scan extends Ci_Controller
 					$error = array('error' => $this->upload->display_errors());
 					echo $error['error']; die;
 				} else {
-						if ($jam_msk > $jam_msk_media) {
-							$upload_data = $this->upload->data();
-							$data = [
-								'id_karyawan' => $result_code,
-								'tgl' => $tgl,
-								'jam_msk' => $jam_msk,
-								'id_khd' => 6,
-								'id_status' => 1,
-								'img' => base_url("uploads/cam_image/").$upload_data["file_name"]
-							];
-					} else {
-							$upload_data = $this->upload->data();
-							$data = [
-								'id_karyawan' => $result_code,
-								'tgl' => $tgl,
-								'jam_msk' => $jam_msk,
-								'id_khd' => 1,
-								'id_status' => 1,
-								'img' => base_url("uploads/cam_image/").$upload_data["file_name"]
-							];
-					}
+						if ($cek_id->jabatan == 1 || $cek_id->jabatan == 2 ) {
+							if ($jam_msk > $jam_msk_media) {
+								$upload_data = $this->upload->data();
+								$data = [
+									'id_karyawan' => $result_code,
+									'tgl' => $tgl,
+									'jam_msk' => $jam_msk,
+									'id_khd' => 6,
+									'id_status' => 1,
+									'img' => base_url("uploads/cam_image/").$upload_data["file_name"]
+								];
+						} else {
+								$upload_data = $this->upload->data();
+								$data = [
+									'id_karyawan' => $result_code,
+									'tgl' => $tgl,
+									'jam_msk' => $jam_msk,
+									'id_khd' => 1,
+									'id_status' => 1,
+									'img' => base_url("uploads/cam_image/").$upload_data["file_name"]
+								];
+							}
+						} else {
+								if ($jam_msk > $jam_msk_nonmedia) {
+									$upload_data = $this->upload->data();
+									$data = [
+										'id_karyawan' => $result_code,
+										'tgl' => $tgl,
+										'jam_msk' => $jam_msk,
+										'id_khd' => 6,
+										'id_status' => 1,
+										'img' => base_url("uploads/cam_image/").$upload_data["file_name"]
+									];
+								} else {
+										$upload_data = $this->upload->data();
+										$data = [
+											'id_karyawan' => $result_code,
+											'tgl' => $tgl,
+											'jam_msk' => $jam_msk,
+											'id_khd' => 1,
+											'id_status' => 1,
+											'img' => base_url("uploads/cam_image/").$upload_data["file_name"]
+										];
+									}
+						}
 				}
 			} else {
 				$this->session->set_flashdata('messageAlert', '<div class="alert alert-danger" role="alert">Gagal menambahkan menu baru. Tidak ada gambar yang dipilih!</div>');
