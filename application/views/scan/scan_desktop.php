@@ -28,8 +28,8 @@
                         </div>
                     </div>
                     <ul class="list-unstyled" style="margin-top:9px">
-                        <li style="font-size: 150%"><b>Untuk melakukan presensi, dekatkan QR Code ke kamera sampai terdengar bunyi notifikasi pertama.</b></li>
-                        <li style="font-size: 150%"><b>Jauhkan QR code dari kamera dan tunggu 3 detik sampai bunyi notifikasi kedua.</b></li>
+                        <li style="font-size: 150%"><b>Untuk melakukan presensi, dekatkan QR Code ke kamera sampai muncul countdown timer.</b></li>
+                        <li style="font-size: 150%"><b>Jauhkan QR code dari kamera dan tunggu 3 detik sampai countdown timer menghilang.</b></li>
                     </ul>
                     <textarea hidden="" name="id_karyawan" id="result" readonly></textarea>
                     <span>  <input type="submit"  id="button" class="btn btn-success btn-md" value="Cek Kehadiran"></span>
@@ -128,7 +128,7 @@
                             success: function(response){
                                 //if request if made successfully then the response represent the data
                                 audio.play();
-                                // showHideTimer();
+                                showHideTimer();
                                 startStopTimer();
                                 window.location.reload();
                             }

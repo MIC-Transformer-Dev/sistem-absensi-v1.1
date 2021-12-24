@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2021 at 09:56 AM
+-- Generation Time: Dec 24, 2021 at 08:58 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -78,7 +78,7 @@ CREATE TABLE `jabatan` (
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 (1, 'WEB DEVELOPMENT'),
 (2, 'MEDIA'),
-(3, 'BUSINESS RELATION');
+(3, 'MARKETING');
 
 -- --------------------------------------------------------
 
@@ -100,12 +100,23 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id`, `id_karyawan`, `nama_karyawan`, `jabatan`, `id_shift`, `gedung_id`) VALUES
-(1, 'W2112170', 'Anthony Gunardi Purwadipura', 1, 1, 1),
-(4, 'M2112001', 'Tester 01', 2, 1, 1),
-(5, 'B2112004', 'Tester 02', 3, 1, 1),
-(6, 'W2112005', 'Tester 03', 1, 1, 1),
-(7, 'B2112006', 'Tester 04', 3, 1, 1),
-(8, 'M2112007', 'Tester 05', 2, 2, 1);
+(1, 'W2112001', 'Anthony Gunardi Purwadipura', 1, 1, 1),
+(2, 'M2112001', 'Diky Dwi Junianto', 2, 1, 1),
+(3, 'M2112002', 'Febyan Aryanandaka', 2, 1, 1),
+(4, 'M2112003', 'Mochamad Samsul Hadi', 2, 1, 1),
+(5, 'M2112004', 'Mochtar Efvrin Samjaya', 2, 1, 1),
+(6, 'M2112005', 'Muchammad Miqdarul Fikri', 2, 1, 1),
+(7, 'M2112006', 'Rhudolf Martua Raja L Tobing', 2, 1, 1),
+(8, 'M2112007', 'Septian Aprilianto', 2, 1, 1),
+(9, 'M2112008', 'Shoiful Umam', 2, 1, 1),
+(10, 'M2112009', 'Aditya Mahendra', 3, 2, 1),
+(11, 'M2112010', 'Ata Rohmatika', 3, 2, 1),
+(12, 'M2112011', 'Bayu Setiawan', 3, 2, 1),
+(13, 'M2112012', 'Lakshmi Miradiana', 3, 2, 1),
+(14, 'M2112013', 'Lilis Nur Imama', 3, 2, 1),
+(15, 'M2112014', 'Mathea Millenia Mareliasari', 3, 2, 1),
+(16, 'M2112015', 'Rizky Dias Ayu Kusuma P', 3, 2, 1),
+(17, 'M2112016', 'Sriwindy Lebang Tandiallo', 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -197,17 +208,6 @@ CREATE TABLE `presensi` (
   `id_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `presensi`
---
-
-INSERT INTO `presensi` (`id_absen`, `id_karyawan`, `tgl`, `jam_msk`, `jam_klr`, `id_khd`, `ket`, `img`, `id_status`) VALUES
-(1, 'W2112170', '2021-12-11', '09:13:30', '04:38:20', 1, '', '', 2),
-(3, 'W2112170', '2021-12-13', '02:39:15', '04:09:09', 1, '', 'http://localhost/sistem-absensi/uploads/cam_image/W21121701.png', 2),
-(4, 'W2112170', '2021-12-14', '09:38:00', '17:12:00', 1, '', 'http://localhost/sistem-absensi/uploads/cam_image/W2112170.png', 2),
-(33, 'B2112001', '2021-12-21', '14:29:20', '14:34:10', 6, '', 'http://localhost/sistem-absensi/uploads/cam_image/B2112001.png', 2),
-(35, 'W2112170', '2021-12-21', '00:00:00', '00:00:00', 4, '', '', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -280,7 +280,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '::1', 'Admin', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1640142332, 1, 'Admin', 'MIC Transformer', NULL, '123412341234'),
+(1, '::1', 'Admin', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1640331069, 1, 'Admin', 'MIC Transformer', NULL, '123412341234'),
 (2, '::1', 'Operator', '$2y$10$ibxBt.RYG7jib0JxBxB1.usc9pzjqUqPPTvwLgPp1gMRKg6VMLLei', 'operator@operator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1562178403, 1639639442, 1, 'operator', '2', NULL, '34890234809238490'),
 (3, '::1', 'Staff', '$2y$12$RHPXgho6UJLQWv8W3F9oJekbSnFYXyhNADZvuqaYmGEoUD6Yl1Hd.', 'staff@staff.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1564294648, 1564294659, 1, 'staf', 'staff', NULL, '239423849234890');
 
@@ -413,7 +413,7 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `kehadiran`
@@ -437,7 +437,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `shift`
