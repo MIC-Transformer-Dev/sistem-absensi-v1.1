@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2021 at 09:10 AM
+-- Generation Time: Dec 22, 2021 at 09:56 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -77,7 +77,8 @@ CREATE TABLE `jabatan` (
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 (1, 'WEB DEVELOPMENT'),
-(2, 'BROADCASTING');
+(2, 'MEDIA'),
+(3, 'BUSINESS RELATION');
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,12 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id`, `id_karyawan`, `nama_karyawan`, `jabatan`, `id_shift`, `gedung_id`) VALUES
-(1, 'W2112170', 'Anthony Gunardi Purwadipura', 1, 1, 1);
+(1, 'W2112170', 'Anthony Gunardi Purwadipura', 1, 1, 1),
+(4, 'M2112001', 'Tester 01', 2, 1, 1),
+(5, 'B2112004', 'Tester 02', 3, 1, 1),
+(6, 'W2112005', 'Tester 03', 1, 1, 1),
+(7, 'B2112006', 'Tester 04', 3, 1, 1),
+(8, 'M2112007', 'Tester 05', 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -199,7 +205,8 @@ INSERT INTO `presensi` (`id_absen`, `id_karyawan`, `tgl`, `jam_msk`, `jam_klr`, 
 (1, 'W2112170', '2021-12-11', '09:13:30', '04:38:20', 1, '', '', 2),
 (3, 'W2112170', '2021-12-13', '02:39:15', '04:09:09', 1, '', 'http://localhost/sistem-absensi/uploads/cam_image/W21121701.png', 2),
 (4, 'W2112170', '2021-12-14', '09:38:00', '17:12:00', 1, '', 'http://localhost/sistem-absensi/uploads/cam_image/W2112170.png', 2),
-(31, 'W2112170', '2021-12-20', '10:33:09', '00:00:00', 6, '', 'http://localhost/sistem-absensi/uploads/cam_image/W211217030.png', 1);
+(33, 'B2112001', '2021-12-21', '14:29:20', '14:34:10', 6, '', 'http://localhost/sistem-absensi/uploads/cam_image/B2112001.png', 2),
+(35, 'W2112170', '2021-12-21', '00:00:00', '00:00:00', 4, '', '', 3);
 
 -- --------------------------------------------------------
 
@@ -273,7 +280,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '::1', 'Admin', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1639968196, 1, 'Admin', 'MIC Transformer', NULL, '123412341234'),
+(1, '::1', 'Admin', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1640142332, 1, 'Admin', 'MIC Transformer', NULL, '123412341234'),
 (2, '::1', 'Operator', '$2y$10$ibxBt.RYG7jib0JxBxB1.usc9pzjqUqPPTvwLgPp1gMRKg6VMLLei', 'operator@operator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1562178403, 1639639442, 1, 'operator', '2', NULL, '34890234809238490'),
 (3, '::1', 'Staff', '$2y$12$RHPXgho6UJLQWv8W3F9oJekbSnFYXyhNADZvuqaYmGEoUD6Yl1Hd.', 'staff@staff.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1564294648, 1564294659, 1, 'staf', 'staff', NULL, '239423849234890');
 
@@ -400,13 +407,13 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `kehadiran`
@@ -430,7 +437,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `shift`
