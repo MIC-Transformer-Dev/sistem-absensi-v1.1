@@ -21,7 +21,7 @@
                         <label for="sourceSelect">Change video source:</label>
                         <select id="sourceSelect" style="max-width:400px"></select>
                     </div>
-                    <div style="display:flex">
+                    <div id="refresh" style="display:flex">
                         <video id="video" width="512" height="384" style="border: 1px solid gray"></video>
                         <div id="timer" style="margin:auto; font-size:150px; font-weight: bold; display:none">
                         00:03
@@ -66,9 +66,12 @@
             x.style.display = "none";
         }
     }
-
 </script>
 <script type="text/javascript">
+    setInterval(function(){
+        window.location.reload();
+    }, 1200000);
+
     window.addEventListener('load', function () {
         let selectedDeviceId;
         let audio = new Audio("assets/audio/beep.mp3");
@@ -117,7 +120,6 @@
                     canvas.toBlob(function (blob) {
                         formData.append('gambar', blob, uploadedImageName);
                         formData.append('id_karyawan', result.text);
-
                         // console.log(formData);
                         $.ajax({
                             data: formData,
