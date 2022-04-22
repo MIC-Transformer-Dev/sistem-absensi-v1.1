@@ -115,7 +115,7 @@
                     .drawImage(video, 0, 0, canvas.width, canvas.height);
 
                     var formData = new FormData(),
-                    uploadedImageName = result.text+'.png';
+                    uploadedImageName = result.text+String(result.timestamp)+'.png';
 
                     canvas.toBlob(function (blob) {
                         formData.append('gambar', blob, uploadedImageName);
